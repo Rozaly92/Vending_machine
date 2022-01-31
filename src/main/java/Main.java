@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
+        VendingMachine vendingMachine = new VendingMachineImpl();
         System.out.println("***********************************************************");
         System.out.println("Welcome to the Vending machine");
         System.out.println("***********************************************************");
@@ -12,22 +13,32 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("1.  For update list of products");
+        System.out.println("1.  Update list of products");
         System.out.println("2.  Display list of items");
+        System.out.println("3.  Chose product");
+        System.out.println("4.  Enter money");
 
 
         int menu = scanner.nextInt();
         switch (menu) {
             case 1: {
-                System.out.println("You enter 1");
-
+                System.out.println("You entered 1");
                 MyJsonParser.updateList();
                 break;
             }
             case 2: {
                 System.out.println("You entered 2");
-
-                MyJsonParser.showList();
+                vendingMachine.displayProductList();
+                break;
+            }
+            case 3: {
+                System.out.println("You entered 3");
+                vendingMachine.selectProduct();
+                break;
+            }
+            case 4: {
+                System.out.println("You entered 4");
+                vendingMachine.displayEnterDollarsMessage();
                 break;
             }
             default: {

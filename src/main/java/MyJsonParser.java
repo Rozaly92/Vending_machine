@@ -6,7 +6,9 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class MyJsonParser {
@@ -65,7 +67,7 @@ public class MyJsonParser {
         fileWriter.flush();
     }
 
-    public static void showList() throws IOException, ParseException {
+   /* public static void showList() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         FileReader fileReader = new FileReader("input2.json");
 
@@ -80,13 +82,58 @@ public class MyJsonParser {
         System.out.println(columns);
 
 
-        JSONArray items = (JSONArray) jsonObject.get(("items"));
-        Iterator iterator = items.iterator();
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
+        JSONArray itemsJson = (JSONArray) jsonObject.get(("itemList"));
+//        Iterator iterator = itemList.iterator();
+//        while (iterator.hasNext()) {
+//            System.out.println(iterator.next());
+//        }
+
+        List<Item> itemList = new ArrayList<>();
+        for(Object it : itemsJson){
+            JSONObject itemJsonObject = (JSONObject) it;
+
+            String nameFromJson = (String) itemJsonObject.get("name");
+            long amountFromJson = (Long) itemJsonObject.get("amount");
+            String priceFromJson = (String) itemJsonObject.get("price");
+
+            Item item = new Item(nameFromJson, (int)amountFromJson, priceFromJson);
+            itemList.add(item);
         }
 
+        System.out.println(itemList);
 
+
+
+    }*/
+
+    public static List<Item> listOfItems() throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        FileReader fileReader = new FileReader("input2.json");
+
+        Object obj = jsonParser.parse(fileReader);
+
+        JSONObject jsonObject = (JSONObject) obj;
+
+        JSONObject js = (JSONObject) jsonObject.get(("config"));
+        Object rows = js.get("rows");
+        System.out.println(rows);
+        Object columns = js.get("columns");
+        System.out.println(columns);
+
+
+        JSONArray itemsJson = (JSONArray) jsonObject.get(("items"));
+
+        List<Item> itemList = new ArrayList<>();
+        for (Object it : itemsJson) {
+            JSONObject itemJsonObject = (JSONObject) it;
+
+            String nameFromJson = (String) itemJsonObject.get("name");
+            long amountFromJson = (Long) itemJsonObject.get("amount");
+            String priceFromJson = (String) itemJsonObject.get("price");
+
+            Item item = new Item(nameFromJson, (int) amountFromJson, priceFromJson);
+            itemList.add(item);
+        }
+        return itemList;
     }
-
 }
