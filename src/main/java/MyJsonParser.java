@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MyJsonParser {
+    public static final List<Item> itemList = new ArrayList<>();
 
     public static void updateList() throws IOException {
 
@@ -123,7 +124,7 @@ public class MyJsonParser {
 
         JSONArray itemsJson = (JSONArray) jsonObject.get(("items"));
 
-        List<Item> itemList = new ArrayList<>();
+       // List<Item> itemList = new ArrayList<>();
         for (Object it : itemsJson) {
             JSONObject itemJsonObject = (JSONObject) it;
 

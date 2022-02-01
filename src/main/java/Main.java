@@ -14,7 +14,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("1.  Update list of products");
-        System.out.println("2.  Display list of items");
+       // System.out.println("2.  Display list of items");
         System.out.println("3.  Chose product");
         System.out.println("4.  Enter money");
 
@@ -26,14 +26,17 @@ public class Main {
                 MyJsonParser.updateList();
                 break;
             }
-            case 2: {
-                System.out.println("You entered 2");
-                vendingMachine.displayProductList();
-                break;
-            }
+//            case 2: {
+//                System.out.println("You entered 2");
+//                vendingMachine.displayProductList();
+//
+//            }
             case 3: {
                 System.out.println("You entered 3");
-                vendingMachine.selectProduct();
+               // vendingMachine.selectProduct();
+                vendingMachine.displayProductList();
+                Calculator calculator = new CalculatorImpl() ;
+                calculator.calculateSumForChange();
                 break;
             }
             case 4: {
