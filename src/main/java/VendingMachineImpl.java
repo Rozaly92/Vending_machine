@@ -10,8 +10,8 @@ public class VendingMachineImpl implements VendingMachine {
     private int amountChoseFromUser;
     private double moneyEnteredFromUser;
     private int idForSelectedProduct;
-    MyJsonParser dataFromJson = new MyJsonParser();
-    CalculatorImpl calculator = new CalculatorImpl();
+//    MyJsonParser dataFromJson = new MyJsonParser();
+//    CalculatorImpl calculator = new CalculatorImpl();
 
     public Scanner getScanner() {
         return scanner;
@@ -66,8 +66,9 @@ public class VendingMachineImpl implements VendingMachine {
     @Override
     public int selectProduct() throws IOException, ParseException {
         System.out.println("Select product, please!");
-        this.idForSelectedProduct = scanner.nextInt();
-        return idForSelectedProduct - 1; //idForSelectedProduct-1 because list starts from index 0
+            this.idForSelectedProduct = scanner.nextInt();
+         return idForSelectedProduct - 1; //idForSelectedProduct-1 because list starts from index 0
+
     }
 
     @Override

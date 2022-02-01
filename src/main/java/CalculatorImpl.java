@@ -1,49 +1,39 @@
-import org.json.simple.parser.ParseException;
-
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class CalculatorImpl implements Calculator {
-    private double moneyEnteredFromUser;
-    int id;
-    int amountFromUser;
+    private double moneyEnteredFromUser;  //will be removed
+    int id;//will be removed
+    int amountFromUser;//will be removed
     double price;
+    String priceForPars = null;
+    double pricePerTotalAmount;
+    double totalMoneyToChange;
 
     @Override
-    public double calculateSumForChange() throws IOException, ParseException {
+    public double calculateSumForChange() {
         VendingMachineImpl vendingMachine = new VendingMachineImpl();
-        this.id = vendingMachine.selectProduct();
-        this.amountFromUser = vendingMachine.selectAmount();
-        this.moneyEnteredFromUser = vendingMachine.enterDollars();
+        Helper helper = new Helper();
 
+        id = helper.checkId();
+       amountFromUser = helper.checkAmount();
 
-        String priceForPars = String.valueOf(MyJsonParser.itemList.get(id));
-        System.out.println(MyJsonParser.itemList.get(id));
-        System.out.println("Amount = " + amountFromUser);
-
-
-        Pattern pattern = Pattern.compile("\\w+([0-9\\.][0-9]+)");
-        Matcher matcher = pattern.matcher(priceForPars);
-        for (int i = 0; i < matcher.groupCount(); i++) {
-            matcher.find();
-            //System.out.println("Price = " + matcher.group());
-            price = Double.parseDouble(matcher.group());
-        }
-
+        price = helper.priceFromList();
         System.out.println("Price = " + price);
 
-        //price = regexpForPrice();
-        double pricePerTotalAmount = price * amountFromUser;
+        this.pricePerTotalAmount = price * amountFromUser;
 
-        System.out.println("Price for amount = " + pricePerTotalAmount);
 
-        double totalMoneyToChange = moneyEnteredFromUser - pricePerTotalAmount;
+        this.moneyEnteredFromUser = helper.checkMoney();
+        if (moneyEnteredFromUser >= pricePerTotalAmount) {
+                totalMoneyToChange = moneyEnteredFromUser - pricePerTotalAmount;
+            System.out.println("Your change is = " + totalMoneyToChange);
+            return totalMoneyToChange;
 
-        System.out.println("Your change is = " + totalMoneyToChange);
+            } else {
+                System.out.println("You don't have enough money");
+            }
 
-        return totalMoneyToChange;
+        System.out.println("Your change is = " + moneyEnteredFromUser);
+        return moneyEnteredFromUser;
+
     }
-
 
 }
