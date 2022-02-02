@@ -1,17 +1,18 @@
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class VendingMachineImpl implements VendingMachine {
     private Scanner scanner = new Scanner(System.in);
     private int amountChoseFromUser;
     private double moneyEnteredFromUser;
     private int idForSelectedProduct;
-//    MyJsonParser dataFromJson = new MyJsonParser();
-//    CalculatorImpl calculator = new CalculatorImpl();
+    final static Logger logger = Logger.getLogger(CalculatorImpl.class);
+//    vending_machine.MyJsonParser dataFromJson = new vending_machine.MyJsonParser();
+//    vending_machine.CalculatorImpl calculator = new vending_machine.CalculatorImpl();
 
     public Scanner getScanner() {
         return scanner;
@@ -56,9 +57,8 @@ public class VendingMachineImpl implements VendingMachine {
                 System.out.println(i);
                 counterForDisplayNumber++;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -66,26 +66,32 @@ public class VendingMachineImpl implements VendingMachine {
     @Override
     public int selectProduct() throws IOException, ParseException {
         System.out.println("Select product, please!");
-            this.idForSelectedProduct = scanner.nextInt();
-         return idForSelectedProduct - 1; //idForSelectedProduct-1 because list starts from index 0
+        logger.info("Provide user to select an item");
+        this.idForSelectedProduct = scanner.nextInt();
+        return idForSelectedProduct - 1; //idForSelectedProduct-1 because list starts from index 0
 
     }
 
     @Override
     public int selectAmount() throws IOException, ParseException {
+
         System.out.println("Input amount, please!");
+        logger.info("Provide user to select amount of item");
         this.amountChoseFromUser = scanner.nextInt();
         return amountChoseFromUser;
     }
 
     @Override
     public void displayEnterDollarsMessage() {
+
         System.out.println("You entered " + enterDollars() + " $!");
+        logger.info("display money");
     }
 
     @Override
     public double enterDollars() {
         System.out.println("Enter money");
+        logger.info("Provide user to enter money");
         moneyEnteredFromUser = scanner.nextDouble();
         return moneyEnteredFromUser;
     }

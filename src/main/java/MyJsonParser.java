@@ -3,17 +3,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import org.apache.log4j.Logger;
 
 public class MyJsonParser {
     public static final List<Item> itemList = new ArrayList<>();
-
+    final static Logger logger = Logger.getLogger(MyJsonParser.class);
     public static void updateList() throws IOException {
 
 
@@ -89,7 +90,7 @@ public class MyJsonParser {
 //            System.out.println(iterator.next());
 //        }
 
-        List<Item> itemList = new ArrayList<>();
+        List<vending_machine.Item> itemList = new ArrayList<>();
         for(Object it : itemsJson){
             JSONObject itemJsonObject = (JSONObject) it;
 
@@ -97,7 +98,7 @@ public class MyJsonParser {
             long amountFromJson = (Long) itemJsonObject.get("amount");
             String priceFromJson = (String) itemJsonObject.get("price");
 
-            Item item = new Item(nameFromJson, (int)amountFromJson, priceFromJson);
+            vending_machine.Item item = new vending_machine.Item(nameFromJson, (int)amountFromJson, priceFromJson);
             itemList.add(item);
         }
 
@@ -107,11 +108,29 @@ public class MyJsonParser {
 
     }*/
 
-    public static List<Item> listOfItems() throws IOException, ParseException {
+    public static List<Item> listOfItems()  {
         JSONParser jsonParser = new JSONParser();
-        FileReader fileReader = new FileReader("input2.json");
+        FileReader fileReader = null;
+        try {
 
-        Object obj = jsonParser.parse(fileReader);
+            fileReader = new FileReader("input2.json");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        }
+
+        Object obj = null;
+        try {
+
+            obj = jsonParser.parse(fileReader);
+            logger.info("The Json file was read");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+            logger.info(e);
+        }
 
         JSONObject jsonObject = (JSONObject) obj;
 
@@ -124,7 +143,7 @@ public class MyJsonParser {
 
         JSONArray itemsJson = (JSONArray) jsonObject.get(("items"));
 
-       // List<Item> itemList = new ArrayList<>();
+       // List<vending_machine.Item> itemList = new ArrayList<>();
         for (Object it : itemsJson) {
             JSONObject itemJsonObject = (JSONObject) it;
 
@@ -135,6 +154,7 @@ public class MyJsonParser {
             Item item = new Item(nameFromJson, (int) amountFromJson, priceFromJson);
             itemList.add(item);
         }
+        logger.info("The items from JSon was inserted into list");
         return itemList;
     }
 }

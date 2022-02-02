@@ -26,11 +26,11 @@ public class Main {
                 MyJsonParser.updateList();
                 break;
             }
-//            case 2: {
-//                System.out.println("You entered 2");
-//                vendingMachine.displayProductList();
-//
-//            }
+            case 2: {
+                System.out.println("You entered 2");
+                vendingMachine.displayProductList();
+
+            }
             case 3: {
                 System.out.println("You entered 3");
                // vendingMachine.selectProduct();
@@ -41,6 +41,8 @@ public class Main {
             }
             case 4: {
                 System.out.println("You entered 4");
+//                Calculator calculator = new CalculatorImpl() ;
+//                calculator.calculateSumForChange();
                 vendingMachine.displayEnterDollarsMessage();
                 break;
             }
