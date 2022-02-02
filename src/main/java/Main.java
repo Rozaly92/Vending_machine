@@ -23,7 +23,7 @@ public class Main {
         switch (menu) {
             case 1: {
                 System.out.println("You entered 1");
-                MyJsonParser.updateList();
+               // MyJsonParser.updateList();
                 break;
             }
             case 2: {
@@ -33,10 +33,12 @@ public class Main {
             }
             case 3: {
                 System.out.println("You entered 3");
-               // vendingMachine.selectProduct();
+                // vendingMachine.selectProduct();
                 vendingMachine.displayProductList();
-                Calculator calculator = new CalculatorImpl() ;
-                calculator.calculateSumForChange();
+                Helper helper = new Helper();
+                helper.showDetails();
+                // Calculator calculator = new CalculatorImpl() ;
+                //calculator.calculateSumForChange();
                 break;
             }
             case 4: {

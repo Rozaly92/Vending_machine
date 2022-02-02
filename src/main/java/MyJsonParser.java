@@ -15,59 +15,63 @@ import org.apache.log4j.Logger;
 public class MyJsonParser {
     public static final List<Item> itemList = new ArrayList<>();
     final static Logger logger = Logger.getLogger(MyJsonParser.class);
-    public static void updateList() throws IOException {
 
-
-        Scanner scanner1 = new Scanner(System.in);
-
-        System.out.println("enter rows");
-        int rows = scanner1.nextInt();
-        scanner1.nextLine();
-        System.out.println("enter columns");
-        String columns = scanner1.nextLine();
-
-
-        JSONObject configs = new JSONObject();
-
-        configs.put("rows", rows);
-
-        configs.put("columns", columns);
-
-
-        JSONArray array = new JSONArray();
-        JSONObject alls = new JSONObject();
-        alls.put("config", configs);
-
-
-        for (int i = 0; i < rows; i++) {
-            System.out.println("Enter name");
-            String name = scanner1.nextLine();
-
-            System.out.println("Enter amount");
-            int amount = scanner1.nextInt();
-
-            scanner1.nextLine();
-            System.out.println("Enter price");
-            String price = scanner1.nextLine();
-
-
-            JSONObject items = new JSONObject();
-            items.put("name", name);
-            items.put("amount", amount);
-            items.put("price", price);
-
-
-            array.add(items);
-            alls.put("items", array);
-
-        }
-
-
-        FileWriter fileWriter = new FileWriter("input3.json");
-        fileWriter.write(alls.toJSONString());
-
-        fileWriter.flush();
+    public MyJsonParser() throws IOException {
     }
+
+//
+//
+//    public static void updateList() throws IOException {
+//        Scanner scanner1 = new Scanner(System.in);
+//
+//        System.out.println("enter rows");
+//        int rows = scanner1.nextInt();
+//        scanner1.nextLine();
+//        System.out.println("enter columns");
+//        String columns = scanner1.nextLine();
+//
+//
+//        JSONObject configs = new JSONObject();
+//
+//        configs.put("rows", rows);
+//
+//        configs.put("columns", columns);
+//
+//
+//        JSONArray array = new JSONArray();
+//        JSONObject alls = new JSONObject();
+//        alls.put("config", configs);
+//
+//
+//        for (int i = 0; i < rows; i++) {
+//            System.out.println("Enter name");
+//            String name = scanner1.nextLine();
+//
+//            System.out.println("Enter amount");
+//            int amount = scanner1.nextInt();
+//
+//            scanner1.nextLine();
+//            System.out.println("Enter price");
+//            String price = scanner1.nextLine();
+//
+//
+//            JSONObject items = new JSONObject();
+//            items.put("name", name);
+//            items.put("amount", amount);
+//            items.put("price", price);
+//
+//
+//            array.add(items);
+//            alls.put("items", array);
+//
+//        }
+//
+//
+//        FileWriter fileWriter = new FileWriter("input3.json");
+//        fileWriter.write(alls.toJSONString());
+//
+//        fileWriter.flush();
+//    }
 
    /* public static void showList() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
@@ -157,4 +161,70 @@ public class MyJsonParser {
         logger.info("The items from JSon was inserted into list");
         return itemList;
     }
+
+
+
+
+
+    public static void updateList(Item item, int amountForUpdate) throws IOException {
+        Scanner scanner1 = new Scanner(System.in);
+
+        System.out.println("enter rows");
+        int rows = scanner1.nextInt();
+        scanner1.nextLine();
+        System.out.println("enter columns");
+        String columns = scanner1.nextLine();
+
+
+        JSONObject configs = new JSONObject();
+
+        configs.put("rows", rows);
+
+        configs.put("columns", columns);
+
+
+        JSONArray array = new JSONArray();
+        JSONObject alls = new JSONObject();
+        alls.put("config", configs);
+
+
+        String name;
+        Integer amount;
+        String price;
+        Item newItem = null;
+        JSONObject items = null;
+        for (int i = 0; i < itemList.size(); i++) {
+            name = itemList.get(i).getName();
+            price = itemList.get(i).getPrice();
+
+            if(itemList.get(i).equals(item)) {
+                        amount = amountForUpdate;
+                        newItem = new Item(name, amount, price);
+                }
+
+                else {
+                    amount = itemList.get(i).getAmount();
+                    newItem = new Item(name, amount, price);
+                    }
+
+
+            items = new JSONObject();
+            items.put("name", name);
+            items.put("amount", amount);
+            items.put("price", price);
+
+                    array.add(items);
+                    alls.put("items", array);
+
+
+            }
+
+        FileWriter fileWriter = new FileWriter("input2.json");
+        fileWriter.write(alls.toJSONString());
+
+        fileWriter.flush();
+    }
+
+
+
 }
