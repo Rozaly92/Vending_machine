@@ -63,20 +63,13 @@ public class VendingMachineImpl implements VendingMachine {
         }
     }
 
-//    @Override
-//    public int selectProduct() throws IOException, ParseException {
-//        System.out.println("Select product, please!");
-//        logger.info("Provide user to select an item");
-//        this.idForSelectedProduct = scanner.nextInt();
-//        return idForSelectedProduct - 1; //idForSelectedProduct-1 because list starts from index 0
-//
-//    }
 
 
     @Override
     public int selectProduct() throws IOException, ParseException {
-        // System.out.println("Select product, please!");
+
         logger.info("Provide user to select an item");
+
         System.out.println("From 0 to 9");
         do {
             System.out.println("Select product, please!");
@@ -91,12 +84,11 @@ public class VendingMachineImpl implements VendingMachine {
 
     @Override
     public int selectAmount() throws IOException, ParseException {
-
-        System.out.println("Input amount, please!");
         logger.info("Provide user to select amount of item");
         do {
             System.out.println("Input amount, please!");
             this.amountChoseFromUser = scanner.nextInt();
+
         } while (!(amountChoseFromUser > 0 && amountChoseFromUser <= MyJsonParser.itemList.get(idForSelectedProduct).getAmount()));
         return amountChoseFromUser;
     }
@@ -111,7 +103,9 @@ public class VendingMachineImpl implements VendingMachine {
     @Override
     public double enterDollars() {
         System.out.println("Enter money");
+
         logger.info("Provide user to enter money");
+
         moneyEnteredFromUser = scanner.nextDouble();
         return moneyEnteredFromUser;
     }

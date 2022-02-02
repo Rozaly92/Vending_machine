@@ -15,73 +15,30 @@ public class Helper {
     final static Logger logger = Logger.getLogger(Helper.class);
 
 
-    public int checkId() throws IOException, ParseException {
-        // try {
-        this.id = vendingMachine.selectProduct();
-//            System.out.print("You selected -> ");
-//            System.out.println(MyJsonParser.itemList.get(id));
-//            logger.info("Id have been selected");
-//
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("You selected a wrong item");
-//            logger.error(e);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return id;
-//    }
+    public int checkId() {
+        try {
+            this.id = vendingMachine.selectProduct();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        logger.info("The item has been selected "+ MyJsonParser.itemList.get(id));
 
-
-//    public int checkId() {
-//        try {
-//            this.id = vendingMachine.selectProduct();
-////            System.out.print("You selected -> ");
-//            System.out.println(MyJsonParser.itemList.get(id));
-//            logger.info("Id have been selected");
-//
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("You selected a wrong item");
-//            logger.error(e);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
         return id;
     }
 
 
-    public int checkAmount() throws IOException, ParseException {
+    public int checkAmount() {
+        try {
+            this.amountFromUser = vendingMachine.selectAmount();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        logger.info("The amount "+ amountFromUser +" has been selected");
 
-        // try {
-//            System.out.print("You selected -> ");
-        //System.out.println(MyJsonParser.itemList.get(id));
-        this.amountFromUser = vendingMachine.selectAmount();
-        logger.info("The amount have been selected");
-        String name = MyJsonParser.itemList.get(id).getName();
-        Integer amount = MyJsonParser.itemList.get(id).getAmount();
-        String price = MyJsonParser.itemList.get(id).getPrice();
-        Item item = new Item(name, amount, price);
-        int idForUpdateAmountInJSonFile = MyJsonParser.itemList.get(id).getAmount() - amountFromUser;
-        MyJsonParser.updateList(item, idForUpdateAmountInJSonFile);
-
-
-//            if(amountFromUser > MyJsonParser.itemList.get(id).getAmount() ||
-//                    amountFromUser<0){
-//                System.out.println("Wrong amount");
-//                amountFromUser = -1;
-//            }
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("you can't insert amount because You selected a wrong item");
-//            logger.error(e);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
         return amountFromUser;
     }
 
@@ -90,16 +47,15 @@ public class Helper {
 
         this.moneyEnteredFromUser = vendingMachine.enterDollars();
         if (moneyEnteredFromUser >= 0) {
+            logger.info("The user inserted " + moneyEnteredFromUser + " $");
             return moneyEnteredFromUser;
         }
-
         return -1;
     }
 
     public double priceFromList() {
         double price = 0;
         try {
-            logger.info("Start parsing the price from list");
             this.priceForPars = String.valueOf(MyJsonParser.itemList.get(id));
             Pattern pattern = Pattern.compile("\\w+([0-9\\.][0-9]+)");
             Matcher matcher = pattern.matcher(priceForPars);
@@ -107,10 +63,9 @@ public class Helper {
             for (int i = 0; i < matcher.groupCount(); i++) {
                 matcher.find();
                 price = Double.parseDouble(matcher.group());
-                logger.info("Successful parsing");
+                logger.info("The price for selected item is " + price+ " $");
             }
         } catch (IndexOutOfBoundsException e) {
-            //System.out.println("You can't parse this price because You selected a wrong item");
             logger.info(e);
         }
 
@@ -118,13 +73,22 @@ public class Helper {
     }
 
 
-    public void showDetails() throws IOException, ParseException {
+    public void showDetails()  {
 
-        System.out.println("User selected the item = " + MyJsonParser.itemList.get(id));
-        System.out.println("The amount = " + MyJsonParser.itemList.get(id).getAmount());
-        System.out.println("Price = " + priceFromList());
-        System.out.println("Your change is = " + new CalculatorImpl().calculateSumForChange());
+        System.out.println("You selected the item = " + MyJsonParser.itemList.get(id));
+         System.out.println("The amount = " + amountFromUser);
+
+        CalculatorImpl calculator = new CalculatorImpl();
+        calculator.calculateTotalPrice();
     }
 
 
+    public void update() {
+        String name = MyJsonParser.itemList.get(id).getName();
+        Integer amount = MyJsonParser.itemList.get(id).getAmount();
+        String price = MyJsonParser.itemList.get(id).getPrice();
+        Item item = new Item(name, amount, price);
+        int idForUpdateAmountInJSonFile = MyJsonParser.itemList.get(id).getAmount() - amountFromUser;
+        MyJsonParser.updateList(item, idForUpdateAmountInJSonFile);
+    }
 }

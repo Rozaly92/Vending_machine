@@ -3,5 +3,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 
 public interface Calculator {
-double calculateSumForChange() throws IOException, ParseException;
+    double totalPricePerAmount();
+    void calculateTotalPrice();
 }
