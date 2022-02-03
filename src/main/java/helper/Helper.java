@@ -1,16 +1,26 @@
+package helper;
+
+import calculator.CalculatorImpl;
+import item.Item;
+import jSonParser.MyJsonParser;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
+import ven_machine.VendingMachineImpl;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Getter
+@Setter
 public class Helper {
     VendingMachineImpl vendingMachine = new VendingMachineImpl();
-    double moneyEnteredFromUser;
-    int id;
-    int amountFromUser;
-    String priceForPars;
+    private double moneyEnteredFromUser;
+    private int id;
+    private int amountFromUser;
+    private String priceForPars;
 
     final static Logger logger = Logger.getLogger(Helper.class);
 
@@ -74,10 +84,6 @@ public class Helper {
 
 
     public void showDetails()  {
-
-        System.out.println("You selected the item = " + MyJsonParser.itemList.get(id));
-         System.out.println("The amount = " + amountFromUser);
-
         CalculatorImpl calculator = new CalculatorImpl();
         calculator.calculateTotalPrice();
     }

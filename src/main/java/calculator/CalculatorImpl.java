@@ -1,16 +1,19 @@
+package calculator;
+
+import helper.Helper;
 import org.apache.log4j.Logger;
 
 public class CalculatorImpl implements Calculator {
     private double moneyEnteredFromUser;
-    int id;
-    int amountFromUser;
-    double price;
-    double pricePerTotalAmount;
-    double totalMoneyToChange;
+    private int id;
+    private  int amountFromUser;
+    private double price;
+    private double pricePerTotalAmount;
+    private double totalMoneyToChange;
     Helper helper = new Helper();
     final static Logger logger = Logger.getLogger(CalculatorImpl.class);
 
-
+    @Override
     public double totalPricePerAmount() {
         id = helper.checkId();
         amountFromUser = helper.checkAmount();
@@ -19,6 +22,8 @@ public class CalculatorImpl implements Calculator {
         pricePerTotalAmount = price * amountFromUser;
         return pricePerTotalAmount;
     }
+
+
 
     @Override
     public void calculateTotalPrice() {
