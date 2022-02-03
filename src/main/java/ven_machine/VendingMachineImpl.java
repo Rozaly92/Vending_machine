@@ -23,6 +23,7 @@ public class VendingMachineImpl implements VendingMachine {
     private double moneyEnteredFromUser;
     private int idForSelectedProduct;
     private String priceForPars;
+
     final static Logger logger = Logger.getLogger(VendingMachineImpl.class);
 
     @Override
@@ -49,14 +50,19 @@ public class VendingMachineImpl implements VendingMachine {
 
         logger.info("Provide user to select an item");
 
-        System.out.println("From 0 to 9");
+        int sizeOfList = MyJsonParser.itemList.size();
+        System.out.println("From 1 to "+ sizeOfList);
+
         do {
             System.out.println("Select product, please!");
             this.idForSelectedProduct = scanner.nextInt();
             --idForSelectedProduct;
 
-        } while (!(idForSelectedProduct >= 0 && idForSelectedProduct <= 8));
+        } while (!(idForSelectedProduct >= 0 && idForSelectedProduct < sizeOfList));
+        System.out.println("You selected "+MyJsonParser.itemList.get(idForSelectedProduct));
+
         logger.info("The item has been selected "+ MyJsonParser.itemList.get(idForSelectedProduct));
+
         return idForSelectedProduct;
     }
 
@@ -64,11 +70,13 @@ public class VendingMachineImpl implements VendingMachine {
     @Override
     public int selectAmount() throws IOException, ParseException {
         logger.info("Provide user to select amount of item");
+
         do {
             System.out.println("Input amount, please!");
             this.amountChoseFromUser = scanner.nextInt();
 
         } while (!(amountChoseFromUser > 0 && amountChoseFromUser <= MyJsonParser.itemList.get(idForSelectedProduct).getAmount()));
+        System.out.println("Selected amount = "+amountChoseFromUser);
 
        logger.info("Selected amount = "+amountChoseFromUser);
     return amountChoseFromUser;
@@ -77,10 +85,9 @@ public class VendingMachineImpl implements VendingMachine {
     @Override
     public void displayEnterDollarsMessage() {
 
+
         CalculatorImpl calculator = new CalculatorImpl();
         calculator.calculateTotalPrice();
-       // System.out.println("You entered " + enterDollars() + " $!");
-       // logger.info("display money");
     }
 
     @Override
@@ -88,11 +95,11 @@ public class VendingMachineImpl implements VendingMachine {
         System.out.println("Enter money");
 
         logger.info("Provide user to enter money");
-
         moneyEnteredFromUser = scanner.nextDouble();
         logger.info("The user inserted " + moneyEnteredFromUser + " $");
         return moneyEnteredFromUser;
     }
+
 
     @Override
     public double priceFromList() {

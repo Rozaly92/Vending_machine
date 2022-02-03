@@ -65,8 +65,10 @@ public class MyJsonParser {
             long amountFromJson = (Long) itemJsonObject.get("amount");
             String priceFromJson = (String) itemJsonObject.get("price");
 
-            Item item = new Item(nameFromJson, (int) amountFromJson, priceFromJson);
-            itemList.add(item);
+            if (amountFromJson != 0) {
+                Item item = new Item(nameFromJson, (int) amountFromJson, priceFromJson);
+                itemList.add(item);
+            }
         }
         logger.info("The items from JSon was inserted into list");
         return itemList;

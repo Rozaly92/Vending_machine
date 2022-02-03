@@ -37,6 +37,7 @@ public class CalculatorImpl implements Calculator {
         moneyEnteredFromUser = vendingMachine.enterDollars();
         logger.info("price per one item = "+ price);
         pricePerTotalAmount = price * amountFromUser;
+
         logger.info("Total price for "+amountFromUser + " = " + pricePerTotalAmount);
         return pricePerTotalAmount;
     }
