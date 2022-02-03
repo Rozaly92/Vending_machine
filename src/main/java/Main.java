@@ -1,4 +1,4 @@
-import helper.Helper;
+
 import org.json.simple.parser.ParseException;
 import ven_machine.VendingMachine;
 import ven_machine.VendingMachineImpl;
@@ -14,8 +14,9 @@ public class Main {
 
 
         vendingMachine.displayProductList();
-        Helper helper = new Helper();
-        helper.showDetails();
+        vendingMachine.displayEnterDollarsMessage();
+//        Helper helper = new Helper();
+//        helper.showDetails();
 
 
 

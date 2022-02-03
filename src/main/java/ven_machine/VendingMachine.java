@@ -10,6 +10,6 @@ public interface VendingMachine {
     int selectAmount()throws IOException, ParseException ;
     void displayEnterDollarsMessage();
     double enterDollars();
-
-
+    double priceFromList();
+    void update();
 }
