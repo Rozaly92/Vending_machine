@@ -1,0 +1,26 @@
+2022-02-06 04:35:54 INFO  [main]: The Json file was read
+2022-02-06 04:35:54 INFO  [main]: The items from JSon was inserted into list
+2022-02-06 04:35:54 INFO  [main]: Provide user to select an item
+2022-02-06 04:36:03 INFO  [main]: The item has been selected Item(name=Snickers, amount=10, price=$1.35)
+2022-02-06 04:36:03 INFO  [main]: Provide user to select amount of item
+2022-02-06 04:36:09 INFO  [main]: Selected amount = 10
+2022-02-06 04:36:09 INFO  [main]: The price for selected item is 1.35 $
+2022-02-06 04:36:09 INFO  [main]: Provide user to enter money
+2022-02-06 04:36:16 INFO  [main]: The Json file was read
+2022-02-06 04:36:16 INFO  [main]: The items from JSon was inserted into list
+2022-02-06 04:36:16 INFO  [main]: Provide user to select an item
+2022-02-06 04:36:18 INFO  [main]: The item has been selected Item(name=Snickers, amount=10, price=$1.35)
+2022-02-06 04:36:18 INFO  [main]: Provide user to select amount of item
+2022-02-06 04:36:23 INFO  [main]: The Json file was read
+2022-02-06 04:36:23 INFO  [main]: The items from JSon was inserted into list
+2022-02-06 04:36:23 INFO  [main]: Provide user to select an item
+2022-02-06 04:36:31 INFO  [main]: The item has been selected Item(name=Snickers, amount=10, price=$1.35)
+2022-02-06 04:36:31 INFO  [main]: Provide user to select amount of item
+2022-02-06 04:36:39 INFO  [main]: Selected amount = 1
+2022-02-06 04:36:39 INFO  [main]: The price for selected item is 1.35 $
+2022-02-06 04:36:39 INFO  [main]: Provide user to enter money
+2022-02-06 04:36:43 INFO  [main]: The user inserted 1.0 $
+2022-02-06 04:36:43 INFO  [main]: price per one item = 1.35
+2022-02-06 04:36:43 INFO  [main]: Total price for 1 = 1.35
+2022-02-06 04:36:43 INFO  [main]: The user hasn't enough money
+2022-02-06 04:36:43 INFO  [main]: The user was returned 1.0 $
