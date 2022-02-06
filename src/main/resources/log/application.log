@@ -24,3 +24,6 @@
 2022-02-06 04:36:43 INFO  [main]: Total price for 1 = 1.35
 2022-02-06 04:36:43 INFO  [main]: The user hasn't enough money
 2022-02-06 04:36:43 INFO  [main]: The user was returned 1.0 $
+2022-02-06 04:41:10 INFO  [main]: The Json file was read
+2022-02-06 04:41:10 INFO  [main]: The items from JSon was inserted into list
+2022-02-06 04:41:10 INFO  [main]: Provide user to select an item
