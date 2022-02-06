@@ -28,6 +28,7 @@ public class VendingMachineImpl implements VendingMachine {
 
     @Override
     public void displayProductList() {
+
         try {
             List<Item> listForDisplay = MyJsonParser.listOfItems();
             int counterForDisplayNumber = 1;
@@ -44,14 +45,14 @@ public class VendingMachineImpl implements VendingMachine {
     }
 
 
-
     @Override
     public int selectProduct() throws IOException, ParseException {
 
         logger.info("Provide user to select an item");
 
         int sizeOfList = MyJsonParser.itemList.size();
-        System.out.println("From 1 to "+ sizeOfList);
+
+        System.out.println("From 1 to " + sizeOfList);
 
         do {
             System.out.println("Select product, please!");
@@ -59,9 +60,9 @@ public class VendingMachineImpl implements VendingMachine {
             --idForSelectedProduct;
 
         } while (!(idForSelectedProduct >= 0 && idForSelectedProduct < sizeOfList));
-        System.out.println("You selected "+MyJsonParser.itemList.get(idForSelectedProduct));
+        System.out.println("You selected " + MyJsonParser.itemList.get(idForSelectedProduct));
 
-        logger.info("The item has been selected "+ MyJsonParser.itemList.get(idForSelectedProduct));
+        logger.info("The item has been selected " + MyJsonParser.itemList.get(idForSelectedProduct));
 
         return idForSelectedProduct;
     }
@@ -76,16 +77,14 @@ public class VendingMachineImpl implements VendingMachine {
             this.amountChoseFromUser = scanner.nextInt();
 
         } while (!(amountChoseFromUser > 0 && amountChoseFromUser <= MyJsonParser.itemList.get(idForSelectedProduct).getAmount()));
-        System.out.println("Selected amount = "+amountChoseFromUser);
+        System.out.println("Selected amount = " + amountChoseFromUser);
 
-       logger.info("Selected amount = "+amountChoseFromUser);
-    return amountChoseFromUser;
+        logger.info("Selected amount = " + amountChoseFromUser);
+        return amountChoseFromUser;
     }
 
     @Override
     public void displayEnterDollarsMessage() {
-
-
         CalculatorImpl calculator = new CalculatorImpl();
         calculator.calculateTotalPrice();
     }
@@ -112,7 +111,7 @@ public class VendingMachineImpl implements VendingMachine {
             for (int i = 0; i < matcher.groupCount(); i++) {
                 matcher.find();
                 price = Double.parseDouble(matcher.group());
-                logger.info("The price for selected item is " + price+ " $");
+                logger.info("The price for selected item is " + price + " $");
             }
         } catch (IndexOutOfBoundsException e) {
             logger.info(e);
@@ -120,6 +119,7 @@ public class VendingMachineImpl implements VendingMachine {
 
         return price;
     }
+
     @Override
     public void update() {
         String name = MyJsonParser.itemList.get(idForSelectedProduct).getName();
@@ -129,4 +129,6 @@ public class VendingMachineImpl implements VendingMachine {
         int idForUpdateAmountInJSonFile = MyJsonParser.itemList.get(idForSelectedProduct).getAmount() - amountChoseFromUser;
         MyJsonParser.updateList(item, idForUpdateAmountInJSonFile);
     }
+
+
 }

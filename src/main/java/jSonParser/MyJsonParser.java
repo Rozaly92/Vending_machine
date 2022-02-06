@@ -22,11 +22,12 @@ public class MyJsonParser {
     public MyJsonParser() throws IOException {
     }
 
-    public static List<Item> listOfItems()  {
+
+    public static List<Item> listOfItems() {
         JSONParser jsonParser = new JSONParser();
         FileReader fileReader = null;
         try {
-            fileReader = new FileReader("input2.json");
+            fileReader = new FileReader("input.json");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -102,7 +103,7 @@ public class MyJsonParser {
             name = itemList.get(i).getName();
             price = itemList.get(i).getPrice();
 
-            if(itemList.get(i).equals(item)) {
+            if (itemList.get(i).equals(item)) {
                 amount = amountForUpdate;
                 newItem = new Item(name, amount, price);
             } else {
@@ -121,7 +122,7 @@ public class MyJsonParser {
 
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter("input2.json");
+            fileWriter = new FileWriter("input.json");
             logger.info("The Json file was updated");
         } catch (IOException e) {
             e.printStackTrace();

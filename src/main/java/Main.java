@@ -1,25 +1,22 @@
-
-import org.json.simple.parser.ParseException;
 import ven_machine.VendingMachine;
 import ven_machine.VendingMachineImpl;
 
-import java.io.IOException;
-
 public class Main {
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) {
         VendingMachine vendingMachine = new VendingMachineImpl();
         System.out.println("***********************************************************");
         System.out.println("Welcome to the Vending machine");
         System.out.println("***********************************************************");
 
 
+
         vendingMachine.displayProductList();
         vendingMachine.displayEnterDollarsMessage();
-//        Helper helper = new Helper();
-//        helper.showDetails();
 
 
-
+        System.out.println("***********************************************************");
+        System.out.println("");
+        System.out.println("***********************************************************");
     }
 
 }
